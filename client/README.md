@@ -9,21 +9,15 @@ about programming, resources etc. There's lots of really smart people on twitter
 invaluable information if you ask an aspiring junior dev such as myself. Then I saw a tweet from a stranger validating the need for such a
 thing. Will anyone ever use this? I don't know. But, I'm going to make it and I at least might find some use from it.
 
-## Core
-
-A customizable pleasant visual experience, tied to various tooling that finds stuff around the web and lets you hoarde it!
-
-## ideas?
-
-Inspiration from, pythonds or observable
-
 ## Features
-
+- User authentication//management
 - twitter bot that scrapes threads
 - react notebook interface
-- codepen embeds ?? *(undecided)
+
+## Do you like this?
+
+You should check out (Notion)[https://www.notion.so/pricing] which is releasing v1.0 of their API soon(?)If they do I hope to do interesting things with it. My Client is much inferior to Notion's as you can see :) Ideas for extending the functionality of this play-app are welcome! Please open an issue, however, I'm not promising to work on anything.
 
 ## Stack
 
-Undecided, I'm thinking maybe?
-tweepy(bot) + phoenix(server) + react(hooks) + postgres(db)
+ExTwitter(bot) + Phoenix(server) + React(hooks) + Postgres(db)
