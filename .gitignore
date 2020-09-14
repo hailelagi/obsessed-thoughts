@@ -35,3 +35,6 @@ npm-debug.log
 
 # ignore jetbrains ide
 .idea
+
+# ignore my local postgres config
+/config/dev.exs
