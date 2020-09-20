@@ -15,17 +15,23 @@ defmodule ObsessedThoughtsServerWeb.Router do
   end
 
   # ROUTES
+  # Responsible for rendering html
   scope "/", ObsessedThoughtsServerWeb do
     pipe_through :browser
 
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+    get "/redirect_test", PageController, :redirect_test
+    resources "/user", UserController
   end
-  # Other scopes may use custom stacks.
-  # scope "/api", ObsessedThoughtsServerWeb do
-  #   pipe_through :api
-  # end
+
+  # Responsible for exposing an api endpoint
+  scope "/api", ObsessedThoughtsServerWeb do
+    pipe_through :api
+
+    resources "/review", ReviewController
+  end
 
   # Enables LiveDashboard only for development
   #
