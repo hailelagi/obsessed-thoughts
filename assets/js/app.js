@@ -13,3 +13,14 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../index.css';
+import MyApp from './MyApp.jsx';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <MyApp />
+  </React.StrictMode>,
+  document.getElementById('root')
+);

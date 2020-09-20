@@ -15,15 +15,11 @@ defmodule ObsessedThoughtsServerWeb.Router do
   end
 
   # ROUTES
-  # Responsible for rendering html
+  # Responsible for rendering react app
   scope "/", ObsessedThoughtsServerWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    get "/hello", HelloController, :index
-    get "/hello/:messenger", HelloController, :show
-    get "/redirect_test", PageController, :redirect_test
-    resources "/user", UserController
+    get "/", LayoutController, :index
   end
 
   # Responsible for exposing an api endpoint
