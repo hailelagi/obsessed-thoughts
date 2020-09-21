@@ -5,4 +5,3 @@ defmodule ObsessedThoughtsServerWeb.LayoutController do
     render(conn, "app.html")
   end
 end
-

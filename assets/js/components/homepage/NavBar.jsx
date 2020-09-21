@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../../../static/logo.svg";
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function NavBar(props) {
   return (
     <NavWrapper>
       <Link to={"/"}>
@@ -19,8 +19,11 @@ function NavBar() {
           <Link to={"/login"}>login</Link>
         </li>
         <li>
+          <button onClick={props.toggle}> dark switch</button>
+        </li>
+        <li>
           <Link to={"/signup"}>
-            <button>get started</button>
+            <button>sign up</button>
           </Link>
         </li>
       </ul>
@@ -29,11 +32,11 @@ function NavBar() {
 }
 
 const NavWrapper = styled.nav`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.background};
   padding: 0.5em;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 2px 7px 0 rgba(45, 51, 58, 0.16);
+  box-shadow: var(--lightshadow);
 
   .logo {
     margin-top: 1em;
@@ -48,13 +51,12 @@ const NavWrapper = styled.nav`
     li {
       padding: 1em;
       text-transform: capitalize;
-
       a {
         text-decoration: none;
-        color: var(--primary-dark);
+        color: ${({ theme }) => theme.navFont};
 
         button {
-          color: #fff;
+          color: var(--background);
           background: var(--primary);
           text-transform: capitalize;
           font-weight: 600;

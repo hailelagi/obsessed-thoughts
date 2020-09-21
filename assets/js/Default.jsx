@@ -1,16 +1,38 @@
 import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import error from "../static/images/error.png";
 
-function Default(props) {
+export default function Default(props) {
   return (
-    <div>
+    <DefaultWrapper>
       <h1>Did you get lost?</h1>
-        {/*
       <img src={error} width={400} alt={"404 error page"} />
-      */}
-      <p>navigation link suggestions</p>
-    </div>
+      <p>
+        It seems the page you requested does not exist on Obsessed Thoughts!
+        Don't fret, these things happen, you can <Link to="/">return home</Link>{" "}
+        and learn about this project or you can <Link to="signup">sign up</Link>{" "}
+        to view your <Link to="/collections">collections.</Link>
+      </p>
+    </DefaultWrapper>
   );
 }
 
-export default Default;
+const DefaultWrapper = styled.div`
+  & {
+    text-align: center;
+    padding: 1em;
+  }
+  
+  p {
+    font-weight: 500;
+    font-size: 120%;
+    padding: 1em;
+  }
+  
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: grey;
+  }
+`;

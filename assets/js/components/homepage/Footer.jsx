@@ -15,7 +15,7 @@ function Footer() {
         </p>
       </div>
       <p>
-        Made with <span id="heart">&#10084;</span> by{" "}
+        Made with &#10084; by{" "}
         <a href={"https://github.com/obsessedyouth/"}>Haile Lagi</a>{" "}
       </p>
     </FooterWrapper>
@@ -26,23 +26,22 @@ const FooterWrapper = styled.footer`
   & {
     display: flex;
     justify-content: space-between;
+    color: ${({ theme }) => theme.font};
+    background-color: ${({ theme }) => theme.background};
   }
   p {
     padding: 1em;
-    color: grey;
+    color: var(--grey);
   }
-  
+
   svg {
     padding: 0.1em;
   }
 
   a {
-    color: grey;
+    color: var(--grey);
     font-weight: bold;
     text-decoration: none;
-  }
-  #heart {
-    color: var(--primary-blue);
   }
 `;
 

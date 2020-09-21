@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Feature(props) {
   return (
     <FeatureWrapper>
-      <div className="feature" style={{flexFlow: props.direction}}>
+      <div className="feature" style={{ flexFlow: props.direction }}>
         <div className={"aside"}>
           <h3>Some selling point</h3>
           <p>
@@ -19,12 +19,10 @@ function Feature(props) {
 }
 
 const FeatureWrapper = styled.div`
-  h2 {
-    text-align: center;
-    background-color: #fff;
-    padding: 0.5em;
+  & {
+    color: ${({ theme }) => theme.font};
+    background-color: ${({ theme }) => theme.altBackground};
   }
-
   h3 {
     margin: 0.5em;
   }

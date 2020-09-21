@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -12,7 +13,9 @@ function Header() {
         some fascinating blog, don't you wish you had your own little space to
         keep it all?
       </p>
-      <button>Learn more</button>
+      <Link to="/signup">
+        <button>Get started</button>
+      </Link>
     </HeaderWrapper>
   );
 }
@@ -20,7 +23,7 @@ function Header() {
 const HeaderWrapper = styled.header`
   & {
     color: #fff;
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.feature};
     text-align: center;
     padding: 4em;
   }

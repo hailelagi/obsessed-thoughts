@@ -34,33 +34,9 @@ function Features() {
 const FeaturesWrapper = styled.section`
   h2 {
     text-align: center;
-    background-color: #fff;
+    color: ${({ theme }) => theme.font};
+    background-color: ${({ theme }) => theme.altBackground};
     padding: 0.5em;
-  }
-
-  h3 {
-    margin: 0.5em;
-  }
-  
-  .feature {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .aside {
-    width: 28%;
-    padding: 1em;
-    margin: 2em;
-    text-align: justify;
-    font-size: 160%;
-  }
-
-   p {
-    width: 80%;
-    text-align: justify;
-    }
   }
 `;
 
