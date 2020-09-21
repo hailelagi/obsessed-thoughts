@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import multi from "../../multi.png";
-import rocket from "../../rocket.png";
-import concept from "../../concept.png";
+import multi from "../../../static/images/multi.png";
+import rocket from "../../../static/images/rocket.png";
+import concept from "../../../static/images/concept.png";
 import Feature from "./Feature";
 /*
 //Image source credits :)

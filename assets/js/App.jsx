@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./App.css";
+import "../css/App.css";
 
 import Header from "./components/homepage/Header.jsx";
 import NavBar from "./components/homepage/NavBar.jsx";

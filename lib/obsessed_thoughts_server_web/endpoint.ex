@@ -26,16 +26,6 @@ defmodule ObsessedThoughtsServerWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
-    plug :introspect
-
-    def introspect(conn, _opts) do
-      IO.puts"""
-      Verb: #{inspect(conn.method)}
-      Host: #{inspect(conn.host)}
-      Headers: #{inspect(conn.req_headers)}
-      """
-      conn
-    end
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

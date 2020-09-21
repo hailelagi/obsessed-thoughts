@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../logo.svg";
+import logo from "../../../static/logo.svg";
 import { Link } from "react-router-dom";
 
 function NavBar() {

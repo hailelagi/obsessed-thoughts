@@ -28,7 +28,7 @@ module.exports = (env, options) => {
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
@@ -37,6 +37,10 @@ module.exports = (env, options) => {
         {
           test: /\.[s]?css$/,
           use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: ["file-loader"],
         },
       ],
     },
