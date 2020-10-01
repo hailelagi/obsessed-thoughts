@@ -1,6 +1,6 @@
 export const lightTheme = {
   background: "#fff",
-  altBackground: "#fff",
+  altBackground: "#fafafa",
   navFont: "#050709",
   font: "#050709",
   feature: "#f38704",
@@ -9,7 +9,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   background: "#292929",
-  altBackground: "#6a6a6a",
+  altBackground: "#cecece",
   navFont: "#b4b4b4",
   font: "#050709",
   feature: "#343434",

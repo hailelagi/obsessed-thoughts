@@ -39,7 +39,7 @@ export default function SignUp(props) {
           required
         />
         <button type="submit" value="user">
-          login
+          sign in
         </button>
         <p>
           Already have an account? <Link to="/signin"> sign in</Link>
@@ -59,7 +59,7 @@ const FormWrapper = styled.div`
 
   form {
     border: none;
-    background-color: #fafafa;
+    background-color: ${({ theme }) => theme.altBackground};
     border-radius: 3px;
     padding: 2.5em;
     box-shadow: var(--shadow);
@@ -77,7 +77,7 @@ const FormWrapper = styled.div`
     width: 100%;
     border: none;
     border-radius: 4px;
-    background-color: var(--grey);
+    background-color: ${({ theme }) => theme.lightGrey};
     padding: 1em;
     margin: 0.5em;
   }
