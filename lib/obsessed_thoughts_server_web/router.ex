@@ -20,11 +20,9 @@ defmodule ObsessedThoughtsServerWeb.Router do
 
     get "/", LayoutController, :index
     get "/login", LayoutController, :index
-    get "signup", LayoutController, :index
+    get "/signup", LayoutController, :index
     get "/collections", LayoutController, :index
-
-    # template for learning about contexts
-    resources "/users", UserController
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Responsible for exposing an api endpoint
