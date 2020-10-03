@@ -21,12 +21,43 @@ import Feature from "./Feature";
 */
 
 function Features() {
+  // headings
+  const connect = "Connect the dots";
+  const space = "tooling at your convenience";
+  const learn = "social learning through conversations";
+
+  // descriptions
+  const connectDescription =
+    "Organize tweet threads by category and topic, ask questions" +
+    " learn as much as you want, make little notes for yourself along the way";
+  const spaceDescription =
+    "Use extensible technology to support your social learning! Go ahead, " +
+    "ask that question and get a great answer save it to a note! Next time you're stuck? It's a click away!";
+  const learnDescription =
+    "Go out there! no matter what kind of topic among your peers, mentors" +
+    " and industry experts. It's okay :) social learning is the best kind!";
+
   return (
     <FeaturesWrapper>
-      <h2>What does this mean exactly? </h2>
-      <Feature img={multi} direction={"row wrap"} />
-      <Feature img={rocket} direction={"row-reverse wrap"} />
-      <Feature img={concept} direction={"row wrap"} />
+      <h2>What does this mean for you? </h2>
+      <Feature
+        img={multi}
+        direction={"row wrap"}
+        title={connect}
+        description={connectDescription}
+      />
+      <Feature
+        img={rocket}
+        direction={"row-reverse wrap"}
+        title={space}
+        description={spaceDescription}
+      />
+      <Feature
+        img={concept}
+        direction={"row wrap"}
+        title={learn}
+        description={learnDescription}
+      />
     </FeaturesWrapper>
   );
 }

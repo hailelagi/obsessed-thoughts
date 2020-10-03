@@ -2,10 +2,28 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function Login(props) {
+export default function Login() {
+  // TODO: implement client side validation and redirection
+  // TODO: source for spinner icon animation
+  const [email, setEmail] = useState("");
+
+  function handleLogin(e) {
+    e.preventDefault();
+    // TODO: fetch user session and data
+    // TODO: redirect to collections
+    console.log("form submit data");
+  }
+
+  function handleValidaton(e) {
+    setEmail(e.target.value);
+    const isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    //isEmail.test == true else false animation
+  }
+
   return (
     <FormWrapper>
-      <form action="#" method="POST">
+      <form action="#" method="POST" onSubmit={handleLogin}>
         <label htmlFor="email">Enter your email address </label>
         <input
           title="johnsomething@domain.com"
@@ -13,6 +31,7 @@ export default function Login(props) {
           name="email"
           placeholder="Email"
           required
+          onChange={handleValidaton}
         />
         <label htmlFor="password">Enter your password </label>
         <input
@@ -21,6 +40,7 @@ export default function Login(props) {
           placeholder="password"
           title="Please enter a password"
           required
+          minLength={6}
         />
         <button type="submit" value="user">
           login
@@ -38,7 +58,9 @@ export default function Login(props) {
 
 const FormWrapper = styled.div`
   & {
+    flex: 1 1 auto;
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     background-image: var(--gradient);
@@ -46,7 +68,8 @@ const FormWrapper = styled.div`
 
   form {
     border: none;
-    background-color: ${({ theme }) => theme.altBackground};
+    color: grey;
+    background-color: ${({ theme }) => theme.form};
     border-radius: 3px;
     padding: 2.5em;
     box-shadow: var(--shadow);

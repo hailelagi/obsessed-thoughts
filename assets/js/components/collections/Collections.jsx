@@ -1,7 +1,17 @@
 import React from "react";
+import Notes from "./Notes";
+import styled from "styled-components";
 
-function Collections(props) {
-  return <div>collections notebook type stuff</div>;
+export default function Collections(props) {
+  return (
+    <CollectionsWrapper>
+      <h1>collections of notes</h1>
+      <Notes />
+    </CollectionsWrapper>
+  );
 }
 
-export default Collections;
+const CollectionsWrapper = styled.section`
+  text-align: center;
+  margin-top: 1em;
+`;

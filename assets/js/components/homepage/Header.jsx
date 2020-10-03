@@ -9,8 +9,7 @@ function Header() {
         A place to save interesting stuff on the web.
       </h1>
       <p>
-        Have you seen a really awesome tweet thread somewhere? or maybe you read
-        some fascinating blog, don't you wish you had your own little space to
+        Have you seen a really awesome tweet thread somewhere? tired of bookmarking stuff in an unorganised mess? Don't you wish you had your own little space to
         keep it all?
       </p>
       <Link to="/signup">

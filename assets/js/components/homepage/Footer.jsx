@@ -30,7 +30,7 @@ const FooterWrapper = styled.footer`
     background-color: ${({ theme }) => theme.background};
   }
   p {
-    padding: 1em;
+    padding: 0.45em 1em;
     color: var(--grey);
   }
 

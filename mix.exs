@@ -46,7 +46,8 @@ defmodule ObsessedThoughtsServer.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.8"}
+      {:extwitter, "~> 0.8"},
+      {:guardian, "~> 2.0"}
     ]
   end
 

@@ -22,13 +22,13 @@ defmodule ObsessedThoughtsServerWeb.Router do
     get "/login", LayoutController, :index
     get "/signup", LayoutController, :index
     get "/collections", LayoutController, :index
-    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Responsible for exposing an api endpoint
   scope "/api", ObsessedThoughtsServerWeb do
     pipe_through :api
-
+    # account user creation and authentication route
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

@@ -20,6 +20,8 @@ export default function Default(props) {
 
 const DefaultWrapper = styled.div`
   & {
+    flex: 1 1 auto;
+    width: 100%;
     text-align: center;
     padding: 1em;
   }
