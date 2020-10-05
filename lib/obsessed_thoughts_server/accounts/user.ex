@@ -1,12 +1,12 @@
 defmodule ObsessedThoughtsServer.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias ObsessedThoughtsServer.Accounts.Credential
 
   schema "users" do
-    field :name, :string
     field :username, :string
-    has_one :credential, Credential
+    field :email, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
 
     timestamps()
   end
@@ -14,8 +14,9 @@ defmodule ObsessedThoughtsServer.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username])
-    |> validate_required([:name, :username])
+    |> cast(attrs, [:username], :password)
+    |> validate_required([:username, :password])
     |> unique_constraint(:username)
+    |> validate_length(:password, min: 6, max: 100)
   end
 end

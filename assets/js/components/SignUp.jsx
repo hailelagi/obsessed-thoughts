@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 
 export default function SignUp(props) {
   function handleSignUp(e) {
-    e.preventDefault();
     // TODO: post user session and login
     // TODO: redirect to collections
-    console.log("form submit data");
+
   }
 
   function handleValidation(e) {
@@ -42,7 +41,7 @@ export default function SignUp(props) {
 
   return (
     <FormWrapper>
-      <form method="post" onSubmit={handleSignUp}>
+      <form action="/api/users" method="post" onSubmit={handleSignUp}>
         <label htmlFor="email">Enter your email address </label>
         <input
           title="johnsomething@domain.com"

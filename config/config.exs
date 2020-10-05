@@ -18,6 +18,18 @@ config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
   pubsub_server: ObsessedThoughtsServer.PubSub,
   live_view: [signing_salt: "7saIPnt0"]
 
+# configure pow authentication
+config :obsessed_thoughts_server, :pow,
+  user: ObsessedThoughtsServer.Users.User,
+  repo: ObsessedThoughtsServer.Repo
+
+# configures twitter authentication
+config = [
+  consumer_key: "REPLACE_WITH_CONSUMER_KEY",
+  consumer_secret: "REPLACE_WITH_CONSUMER_SECRET",
+  redirect_uri: "http://localhost:4000/collections"
+]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
