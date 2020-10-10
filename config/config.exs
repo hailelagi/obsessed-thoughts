@@ -23,7 +23,7 @@ config :obsessed_thoughts_server, :pow,
   user: ObsessedThoughtsServer.Users.User,
   repo: ObsessedThoughtsServer.Repo
 
-# configures twitter authentication
+# TODO: delete configures twitter(dev) authentication
 config = [
   consumer_key: "REPLACE_WITH_CONSUMER_KEY",
   consumer_secret: "REPLACE_WITH_CONSUMER_SECRET",

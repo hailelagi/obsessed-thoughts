@@ -1,78 +1,103 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
-export default function SignUp(props) {
-  function handleSignUp(e) {
-    // TODO: post user session and login
-    // TODO: redirect to collections
+export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [validEmail, setValidEmail] = useState("not-valid");
+  const [validPassword, setValidPassword] = useState("not-valid-pass");
+  const [confirmValidPassword, setValidConfirmPassword] = useState(
+    "not-valid-pass"
+  );
+  const isAuthd = !!localStorage.getItem("token");
 
+  function handleSignup(e) {
+    e.preventDefault();
+    // create auth token and login
+    fetch("/api/registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `user[email]=${email}&user[password]=${password}&user[password_confirmation]=${confirmPassword}`,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // localStorage.setItem("token", data.data);
+        console.log(data);
+      });
   }
 
   function handleValidation(e) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirm, setConfirm] = useState("");
-
+    const isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const name = e.target.name;
     const value = e.target.value;
 
-    if (name === "email") { setEmail(value)}
-    if (name === "password") { setPassword(value)}
-    if (name === "confirm") { setConfirm(value)}
-
-    // TODO: implement client side validation and redirection
-    if (password !== confirm){
-      // bad bad
+    if (name === "user[email]") {
+      setEmail(value);
+      if (isEmail.test(value)) {
+        setValidEmail("valid");
+      } else {
+        setValidEmail("not-valid");
+      }
     }
-    else {
-      // yay animation
+    if (name === "user[password]") {
+      setPassword(value);
+      if (value.length >= 8) {
+        setValidPassword("valid-pass");
+      } else {
+        setValidPassword("not-valid-pass");
+      }
     }
-    let isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    //.test(email) == true else false animation
-    if (isEmail.test){
-      // yay change css to red
-      console.log("wtf")
-    }
-    else {
-      // bad change css to red
+    if (name === "user[password_confirmation]") {
+      setConfirmPassword(value);
+      if (value.length >= 8 && value === password) {
+        setValidConfirmPassword("valid-pass");
+      } else {
+        setValidConfirmPassword("not-valid-pass");
+      }
     }
   }
 
-  return (
+  const userSignInForm = (
     <FormWrapper>
-      <form action="/api/users" method="post" onSubmit={handleSignUp}>
+      <form onSubmit={handleSignup}>
         <label htmlFor="email">Enter your email address </label>
         <input
           title="johnsomething@domain.com"
           type="email"
-          name="email"
+          name="user[email]"
           placeholder="Email"
           required
           onChange={handleValidation}
+          className={validEmail}
         />
         <label htmlFor="password">Enter your password </label>
         <input
           type="password"
-          name="password"
+          name="user[password]"
           placeholder="password"
           title="Please enter a password"
           required
-          minLength={6}
+          minLength={8}
           onChange={handleValidation}
+          className={validPassword}
         />
         <label htmlFor="confirm">Confirm your password </label>
         <input
           type="password"
-          name="confirm"
+          name="user[password_confirmation]"
           placeholder="password"
           title="Please re-enter your password"
           required
-          minLength={6}
+          minLength={8}
           onChange={handleValidation}
+          className={confirmValidPassword}
         />
         <button type="submit" value="user">
-          sign in
+          sign up
         </button>
         <p>
           Already have an account? <Link to="/login"> log in</Link>
@@ -80,10 +105,15 @@ export default function SignUp(props) {
       </form>
     </FormWrapper>
   );
+
+  if (!isAuthd) {
+    // TODO: pass access token
+    return <Redirect to="/collections:" />;
+  }
+  return userSignInForm;
 }
 
 const FormWrapper = styled.div`
-
   & {
     flex: 1 1 auto;
     display: flex;
@@ -91,6 +121,15 @@ const FormWrapper = styled.div`
     align-items: center;
     justify-content: center;
     background-image: var(--gradient);
+  }
+
+  .valid:focus,
+  .valid-pass:focus {
+    outline-color: green;
+  }
+  .not-valid:focus,
+  .not-valid-pass:focus {
+    outline-color: red;
   }
 
   form {

@@ -1,4 +1,3 @@
-# lib/my_app_web/api_auth_plug.ex
 defmodule ObsessedThoughtsServerWeb.APIAuthPlug do
   @moduledoc false
   use Pow.Plug.Base

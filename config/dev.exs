@@ -30,6 +30,17 @@ config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
     ]
   ]
 
+
+  # TODO: Delete dev configuration code
+ config :obsessed_thoughts_server, :pow_assent,
+  providers: [
+    twitter: [
+      consumer_key: "REPLACE_WITH_CONSUMER_KEY",
+      consumer_secret: "REPLACE_WITH_CONSUMER_SECRET",
+      strategy: Assent.Strategy.Twitter
+    ]
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

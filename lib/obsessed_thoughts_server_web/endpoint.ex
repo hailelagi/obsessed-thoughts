@@ -48,10 +48,8 @@ defmodule ObsessedThoughtsServerWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-  plug Plug.Session, @session_options
     # configure pow plugs
   plug Plug.Session, @session_options
   plug Pow.Plug.Session, otp_app: :obsessed_thoughts_server
-  plug ObsessedThoughtsServerWeb.Router
   plug ObsessedThoughtsServerWeb.Router
 end

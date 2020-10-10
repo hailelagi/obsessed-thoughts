@@ -1,59 +1,108 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 export default function Login() {
-  // TODO: implement client side validation and redirection
   // TODO: source for spinner icon animation
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [validEmail, setValidEmail] = useState("not-valid");
+  const [validPassword, setValidPassword] = useState("not-valid-pass");
+  const [flashError, setflashError] = useState("");
+  const isAuthd = !!localStorage.getItem("token");
 
   function handleLogin(e) {
     e.preventDefault();
-    // TODO: fetch user session and data
-    // TODO: redirect to collections
-    console.log("form submit data");
+    // access auth token
+    fetch("/api/session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `user[email]=${email}&user[password]=${password}`,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.hasOwnProperty("data")) {
+          // localStorage.setItem("token", data.data);
+          console.log(data);
+        } else {
+          setflashError(data.error.message);
+        }
+      });
+  }
+
+  function handleTwitter(e) {
+    // TODO: redirect to and /auth/twitter/new
   }
 
   function handleValidaton(e) {
-    setEmail(e.target.value);
     const isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const name = e.target.name;
+    const value = e.target.value;
 
-    //isEmail.test == true else false animation
+    if (name === "user[email]") {
+      if (isEmail.test(value)) {
+        setValidEmail("valid");
+        setEmail(value);
+      } else {
+        setValidEmail("not-valid");
+      }
+    }
+    if (name === "user[password]") {
+      if (value.length >= 8) {
+        setValidPassword("valid-pass");
+        setPassword(value);
+      } else {
+        setValidPassword("not-valid-pass");
+        setPassword(value);
+      }
+    }
   }
-
-  return (
+  const flash = <div className="flash">{flashError}</div>;
+  const userForm = (
     <FormWrapper>
-      <form action="#" method="POST" onSubmit={handleLogin}>
+      <form onSubmit={handleLogin}>
+        {flashError !== "" ? flash : null}
         <label htmlFor="email">Enter your email address </label>
         <input
           title="johnsomething@domain.com"
           type="email"
-          name="email"
+          name="user[email]"
           placeholder="Email"
           required
           onChange={handleValidaton}
+          className={validEmail}
         />
         <label htmlFor="password">Enter your password </label>
         <input
           type="password"
-          name="password"
+          name="user[password]"
           placeholder="password"
           title="Please enter a password"
           required
-          minLength={6}
+          minLength={8}
+          onChange={handleValidaton}
+          className={validPassword}
         />
         <button type="submit" value="user">
           login
         </button>
 
         <span>or</span>
-        <button>Login in with Twitter</button>
+        <button onClick={handleTwitter}>Login in with Twitter</button>
         <p>
           Don't have an account? <Link to="/signup"> you can sign up</Link>
         </p>
       </form>
     </FormWrapper>
   );
+
+  if (!isAuthd) {
+    // TODO: pass access token
+    return <Redirect to="/collections" />;
+  }
+  return userForm;
 }
 
 const FormWrapper = styled.div`
@@ -64,6 +113,24 @@ const FormWrapper = styled.div`
     align-items: center;
     justify-content: center;
     background-image: var(--gradient);
+  }
+
+  .valid:focus,
+  .valid-pass:focus {
+    outline-color: green;
+  }
+  .not-valid:focus,
+  .not-valid-pass:focus {
+    outline-color: red;
+  }
+
+  .flash {
+    background-color: #ff0c07;
+    margin: 1em;
+    padding: 0.5em;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
   }
 
   form {

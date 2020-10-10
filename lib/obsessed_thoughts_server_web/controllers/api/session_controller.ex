@@ -1,7 +1,7 @@
 defmodule ObsessedThoughtsServerWeb.API.SessionController do
   use ObsessedThoughtsServerWeb, :controller
 
-  alias MyAppWeb.APIAuthPlug
+  alias ObsessedThoughtsServerWeb.APIAuthPlug
   alias Plug.Conn
 
   @spec create(Conn.t(), map()) :: Conn.t()
