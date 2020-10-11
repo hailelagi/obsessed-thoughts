@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import logo from "../../../static/logo.svg";
+import logo from "../../static/logo.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faBars } from "@fortawesome/free-solid-svg-icons";
-import { lightTheme } from "../../theme";
+import { lightTheme } from "../theme";
+import { AuthContext } from "../contexts";
 
 function NavBar(props) {
+  const [log, setLog] = useState(false);
+  const value = useContext(AuthContext);
+  {console.log(value)}
+  useEffect(() => {
+    setLog(value.isLogged);
+  });
+
+  // TODO: fix buggy css nav
+  // TODO: polish animations
+  // TODO: signout navbar state functionality
+
   function handleToggle() {
     let mobile = document.querySelector(".mobile-nav");
     if (mobile.style.display === "flex") {
@@ -15,6 +27,22 @@ function NavBar(props) {
       mobile.style.display = "flex";
     }
   }
+
+  function handleLogOut() {
+    // TODO: log user out, delete session
+    // TODO: pass in logout state function here
+  }
+
+  const signUp = (
+    <Link to={"/signup"}>
+      <button>sign up</button>
+    </Link>
+  );
+  const signOut = (
+    <Link to="/">
+      <button onClick={handleLogOut}>sign out</button>
+    </Link>
+  );
 
   return (
     <NavWrapper>
@@ -40,14 +68,12 @@ function NavBar(props) {
           <li>
             <Link to={"/collections"}>collections</Link>
           </li>
-          <li>
-            <Link to={"/login"}>login</Link>
-          </li>
-          <li>
-            <Link to={"/signup"}>
-              <button>sign up</button>
-            </Link>
-          </li>
+          {log ? null : (
+            <li>
+              <Link to="/login">login</Link>
+            </li>
+          )}
+          <li>{log ? signOut : signUp}</li>
           <li>
             <ToggleContainer onClick={props.toggle}>
               <FontAwesomeIcon icon={faSun} size="1x" color="#fff" />
@@ -60,14 +86,12 @@ function NavBar(props) {
           <li>
             <Link to={"/collections"}>collections</Link>
           </li>
-          <li>
-            <Link to={"/login"}>login</Link>
-          </li>
-          <li>
-            <Link to={"/signup"}>
-              <button>sign up</button>
-            </Link>
-          </li>
+          {log ? null : (
+            <li>
+              <Link to="/login">login</Link>
+            </li>
+          )}
+          <li>{log ? signOut : signUp}</li>
         </div>
       </ul>
     </NavWrapper>
@@ -101,7 +125,7 @@ const ToggleContainer = styled.button`
     &:nth-child(2) {
       transform: ${({ theme }) =>
         theme === lightTheme ? "translateX(-100px)" : "translateX(0)"};
-    }
+    } 
   }
 `;
 
@@ -131,7 +155,7 @@ const NavWrapper = styled.nav`
       a {
         text-decoration: none;
         color: ${({ theme }) => theme.navFont};
-
+        
         button {
           color: var(--background);
           background: var(--primary);
@@ -184,7 +208,6 @@ const NavWrapper = styled.nav`
     .large-nav {
       display: none;
     }
-    
     .controls,
     .mobile-toggle {
     display: inherit;

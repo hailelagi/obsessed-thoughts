@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Redirect, Link } from "react-router-dom";
+import { setAccess, setRefresh } from "./collections/globalMessaging";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,8 @@ export default function SignUp() {
   const [confirmValidPassword, setValidConfirmPassword] = useState(
     "not-valid-pass"
   );
-  const isAuthd = !!localStorage.getItem("token");
+  const [flashError, setflashError] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   function handleSignup(e) {
     e.preventDefault();
@@ -21,12 +23,29 @@ export default function SignUp() {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
+      mode: "cors",
       body: `user[email]=${email}&user[password]=${password}&user[password_confirmation]=${confirmPassword}`,
     })
       .then((res) => res.json())
-      .then((data) => {
-        // localStorage.setItem("token", data.data);
-        console.log(data);
+      .then((payload) => {
+        if (payload.hasOwnProperty("data")) {
+          // TODO: replace with cookie - refresh cycle
+          setflashError("");
+          setAccess(payload.data.access_token);
+          setRefresh(payload.data.renewal_token);
+          setRedirect(true);
+        } else {
+          setflashError(
+            payload.error.message +
+              " reason: " +
+              Object.keys(payload.error.errors) +
+              " " +
+              Object.values(payload.error.errors)
+          );
+        }
+      })
+      .catch((error) => {
+        setflashError(error);
       });
   }
 
@@ -61,9 +80,11 @@ export default function SignUp() {
     }
   }
 
+  const flash = <div className="flash">{flashError}</div>;
   const userSignInForm = (
     <FormWrapper>
       <form onSubmit={handleSignup}>
+        {flashError !== "" ? flash : null}
         <label htmlFor="email">Enter your email address </label>
         <input
           title="johnsomething@domain.com"
@@ -106,9 +127,8 @@ export default function SignUp() {
     </FormWrapper>
   );
 
-  if (!isAuthd) {
-    // TODO: pass access token
-    return <Redirect to="/collections:" />;
+  if (redirect) {
+    return <Redirect forceRefresh={true} to="/collections" />;
   }
   return userSignInForm;
 }
@@ -121,15 +141,6 @@ const FormWrapper = styled.div`
     align-items: center;
     justify-content: center;
     background-image: var(--gradient);
-  }
-
-  .valid:focus,
-  .valid-pass:focus {
-    outline-color: green;
-  }
-  .not-valid:focus,
-  .not-valid-pass:focus {
-    outline-color: red;
   }
 
   form {

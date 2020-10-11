@@ -33,3 +33,21 @@ body {
   flex-flow: column;
   height: 100%;
 }
+
+/*flash form styling */
+.valid:focus,
+.valid-pass:focus {
+  outline-color: green;
+}
+.not-valid:focus,
+.not-valid-pass:focus {
+  outline-color: red;
+}
+.flash {
+  background-color: #ff0c07;
+  margin: 1em;
+  padding: 0.5em;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+}

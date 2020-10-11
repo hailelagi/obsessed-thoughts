@@ -4,8 +4,7 @@ defmodule ObsessedThoughtsServerWeb.API.CollectionController do
   alias ObsessedThoughtsServerWeb.APIAuthPlug
   alias Plug.Conn
 
-  def index(conn, %{"data" => access}) do
-    {conn, user} = APIAuthPlug.fetch(conn, access)
-    json(conn, %{omg: "#{user}"})
+  def index(conn, _params) do
+    json(conn, %{user: "hey there you beautiful authorized user"})
   end
 end

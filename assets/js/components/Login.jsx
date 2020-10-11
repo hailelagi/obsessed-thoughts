@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { setAccess, setRefresh } from "./collections/globalMessaging";
 import { Redirect, Link } from "react-router-dom";
 
 export default function Login() {
@@ -9,7 +10,7 @@ export default function Login() {
   const [validEmail, setValidEmail] = useState("not-valid");
   const [validPassword, setValidPassword] = useState("not-valid-pass");
   const [flashError, setflashError] = useState("");
-  const isAuthd = !!localStorage.getItem("token");
+  const [redirect, setRedirect] = useState(false);
 
   function handleLogin(e) {
     e.preventDefault();
@@ -19,15 +20,18 @@ export default function Login() {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
+      mode: "cors",
       body: `user[email]=${email}&user[password]=${password}`,
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.hasOwnProperty("data")) {
-          // localStorage.setItem("token", data.data);
-          console.log(data);
+      .then((payload) => {
+        if (payload.hasOwnProperty("data")) {
+          setflashError("");
+          setAccess(payload.data.access_token);
+          setRefresh(payload.data.renewal_token);
+          setRedirect(true);
         } else {
-          setflashError(data.error.message);
+          setflashError(payload.error.message);
         }
       });
   }
@@ -98,9 +102,8 @@ export default function Login() {
     </FormWrapper>
   );
 
-  if (!isAuthd) {
-    // TODO: pass access token
-    return <Redirect to="/collections" />;
+  if (redirect) {
+    return <Redirect forceRefresh={true} to="/collections" />;
   }
   return userForm;
 }
@@ -118,19 +121,6 @@ const FormWrapper = styled.div`
   .valid:focus,
   .valid-pass:focus {
     outline-color: green;
-  }
-  .not-valid:focus,
-  .not-valid-pass:focus {
-    outline-color: red;
-  }
-
-  .flash {
-    background-color: #ff0c07;
-    margin: 1em;
-    padding: 0.5em;
-    color: white;
-    border-radius: 10px;
-    width: 100%;
   }
 
   form {

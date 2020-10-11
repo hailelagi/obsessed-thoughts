@@ -51,7 +51,7 @@ defmodule ObsessedThoughtsServerWeb.Router do
   scope "/api", ObsessedThoughtsServerWeb.API do
     pipe_through [:api, :api_protected]
     # must be logged in to see a collection
-    post "/collection", CollectionController, :index
+    get "/collection", CollectionController, :index
     # twitter login auth route
     get "/auth/:provider/new", AuthorizationController, :new
     post "/auth/:provider/callback", AuthorizationController, :callback

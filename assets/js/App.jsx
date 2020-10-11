@@ -5,8 +5,8 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./theme.js";
 
 import Header from "./components/homepage/Header.jsx";
-import NavBar from "./components/homepage/NavBar.jsx";
-import Footer from "./components/homepage/Footer.jsx";
+import NavBar from "./components/NavBar.jsx";
+import Footer from "./components/Footer.jsx";
 import Features from "./components/homepage/Features.jsx";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
@@ -14,6 +14,7 @@ import Collections from "./components/collections/Collections";
 import Default from "./Default";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts";
 
 // dynamic global styles
 export const GlobalStyles = createGlobalStyle`
@@ -40,30 +41,40 @@ export default function App() {
   return (
     <Router>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-        <NavBar toggle={toggleTheme} theme={theme} />
         <Switch>
           <Route exact path="/">
+            <AuthProvider>
+              <NavBar toggle={toggleTheme} theme={theme} />
+            </AuthProvider>
             <Header />
             <Features />
-            <Footer />
           </Route>
           <Route path="/collections">
-            <Collections />
-            <Footer />
+            <AuthProvider>
+              <NavBar toggle={toggleTheme} theme={theme} />
+              <Collections />
+            </AuthProvider>
           </Route>
           <Route path="/login">
+            <AuthProvider>
+              <NavBar toggle={toggleTheme} theme={theme} />
+            </AuthProvider>
             <Login />
-            <Footer />
           </Route>
           <Route path="/signup">
+            <AuthProvider>
+              <NavBar toggle={toggleTheme} theme={theme} />
+            </AuthProvider>
             <SignUp />
-            <Footer />
           </Route>
           <Route path="*">
+            <AuthProvider>
+              <NavBar toggle={toggleTheme} theme={theme} />
+            </AuthProvider>
             <Default />
-            <Footer />
           </Route>
         </Switch>
+        <Footer />
       </ThemeProvider>
     </Router>
   );

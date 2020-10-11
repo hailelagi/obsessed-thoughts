@@ -1,37 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Note from "./Note.jsx";
+import { Link } from "react-router-dom";
+import user from "../../../static/images/user.svg";
 
-export default function Notes() {
-  const [data, setData] = useState(
-    "Ut molestias sed ut nesciunt tenetur ullam consequatur" +
-      '"Ut molestias sed ut nesciunt tenetur ullam consequatur. " +\n' +
-      '        "Earum assumenda aspernatur itaque. Sed dolor quaerat ex reprehe" +\n' +
-      '        "nderit earum recusandae."'
-  );
+//Image source credits :)
+/* <a href="https://iconscout.com/illustrations/blog" target="_blank">Blog Illustration</a> by
+ <a href="https://iconscout.com/contributors/pixel-true-designs" target="_blank">Pixel True</a> */
 
-  function isAuthenticated() {
-    //fetch tweet data dynamically display it
-    setData(
-      "update card data"
-    );
-  }
-
+export default function Notes(props) {
   return (
     <NotesWrapper>
-      <Note data={data} color="#00AA55" />
-      <Note data={data} color="#3498DB" />
-      <Note data={data} color="#9B59B6" />
-      <Note data={data} color="#B8860B" />
-      <Note data={data} color="#E63022" />
-      <Note data={data} color="#E74C3C" />
-      <Note data={data} color="#005051" />
-      <Note data={data} color="#939393" />
+      {/*TODO: replace with a map over the tweet data*/}
+      <Note data={props.notes} color="#00AA55" />
+      <Note data={props.notes} color="#3498DB" />
+      <Note data={props.notes} color="#9B59B6" />
+      <Note data={props.notes} color="#B8860B" />
+      <Note data={props.notes} color="#E63022" />
+      <Note data={props.notes} color="#E74C3C" />
+      <Note data={props.notes} color="#005051" />
+      <Note data={props.notes} color="#939393" />
     </NotesWrapper>
   );
 }
 
 const NotesWrapper = styled.div`
+  flex: 1 1 auto;
+  width: 100%;
+  text-align: center;
+  padding: 1em;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
