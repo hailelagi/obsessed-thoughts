@@ -1,6 +1,6 @@
 {
-  "repository": {},
-  "description": " ",
+  "repository": "https://github.com/obsessedyouth/obsessed-thoughts",
+  "description": "notebook app that saves stuff",
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",

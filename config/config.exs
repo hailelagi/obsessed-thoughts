@@ -12,7 +12,7 @@ config :obsessed_thoughts_server,
 
 # Configures the endpoint
 config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
-  url: [host: "https://obsessed-thoughts.gigalixirapp.com/"],
+  url: [host: "localhost"],
   secret_key_base: "qnz3xHzdklxLVPDjGjsfHwYVnYeT2HnRKf2N6cIeNn5GYjBTzbOMrQ8Hoovwkngc",
   render_errors: [view: ObsessedThoughtsServerWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ObsessedThoughtsServer.PubSub,
@@ -22,6 +22,14 @@ config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
 config :obsessed_thoughts_server, :pow,
   user: ObsessedThoughtsServer.Users.User,
   repo: ObsessedThoughtsServer.Repo
+
+# configure bot
+config :extwitter, :oauth, [
+   consumer_key: "6wvdN1GiTMVfcPedZEkvmQ8kf",
+   consumer_secret: "tIQs8BN3eIrWL1zkBqgJRKIbUWWxoiimV2BvSYyRRzvkZnMTL5",
+   access_token: "1164539751585783808-wRKwqxkez3xUH5lVpOmpOHTvFFrLIL",
+   access_token_secret: "JfQ8fqMUuyXslIzMoR4BprqArTZZP93jzUSHnBh1Y0Hbq"
+]
 
 # Configures Elixir's Logger
 config :logger, :console,
