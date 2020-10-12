@@ -12,7 +12,7 @@ config :obsessed_thoughts_server,
 
 # Configures the endpoint
 config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "https://obsessed-thoughts.gigalixirapp.com/"],
   secret_key_base: "qnz3xHzdklxLVPDjGjsfHwYVnYeT2HnRKf2N6cIeNn5GYjBTzbOMrQ8Hoovwkngc",
   render_errors: [view: ObsessedThoughtsServerWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ObsessedThoughtsServer.PubSub,
@@ -22,13 +22,6 @@ config :obsessed_thoughts_server, ObsessedThoughtsServerWeb.Endpoint,
 config :obsessed_thoughts_server, :pow,
   user: ObsessedThoughtsServer.Users.User,
   repo: ObsessedThoughtsServer.Repo
-
-# TODO: delete configures twitter(dev) authentication
-config = [
-  consumer_key: "REPLACE_WITH_CONSUMER_KEY",
-  consumer_secret: "REPLACE_WITH_CONSUMER_SECRET",
-  redirect_uri: "http://localhost:4000/collections"
-]
 
 # Configures Elixir's Logger
 config :logger, :console,
