@@ -1,6 +1,5 @@
 defmodule ObsessedThoughtsServerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :obsessed_thoughts_server
-
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
@@ -49,6 +48,8 @@ defmodule ObsessedThoughtsServerWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
+    # configure pow plugs
   plug Plug.Session, @session_options
+  plug Pow.Plug.Session, otp_app: :obsessed_thoughts_server
   plug ObsessedThoughtsServerWeb.Router
 end

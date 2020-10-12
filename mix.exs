@@ -44,7 +44,11 @@ defmodule ObsessedThoughtsServer.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:oauther, "~> 1.1"},
+      {:extwitter, "~> 0.8"},
+      {:pow, "~> 1.0.21"},
+      {:pow_assent, "~> 0.4.8"}
     ]
   end
 

@@ -1,5 +1,7 @@
 defmodule ObsessedThoughtsServerWeb.Router do
   use ObsessedThoughtsServerWeb, :router
+  use Pow.Phoenix.Router
+  use PowAssent.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,26 +13,52 @@ defmodule ObsessedThoughtsServerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ObsessedThoughtsServerWeb.APIAuthPlug, otp_app: :obsessed_thoughts_server
   end
 
-  scope "/", ObsessedThoughtsServerWeb do
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: ObsessedThoughtsServerWeb.APIAuthErrorHandler
+  end
+
+  scope "/" do
     pipe_through :browser
 
-    get "/", PageController, :index
+    pow_assent_routes()
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ObsessedThoughtsServerWeb do
-  #   pipe_through :api
-  # end
+  # ROUTES
+  # Responsible for rendering react app
+  scope "/", ObsessedThoughtsServerWeb do
+    pipe_through :browser
+    get "/", LayoutController, :index
+    get "/login", LayoutController, :index
+    get "/signup", LayoutController, :index
+    get "/collections", LayoutController, :index
+  end
+
+  # Responsible for exposing an api endpoint
+  scope "/api", ObsessedThoughtsServerWeb.API do
+    pipe_through [:api]
+    # account user creation and authentication route
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    # if credentials are found create login session
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
+
+  end
+
+  # authenticated user api
+  scope "/api", ObsessedThoughtsServerWeb.API do
+    pipe_through [:api, :api_protected]
+    # must be logged in to see a collection
+    get "/collection", CollectionController, :index
+    # twitter login auth route
+    get "/auth/:provider/new", AuthorizationController, :new
+    post "/auth/:provider/callback", AuthorizationController, :callback
+  end
+
 
   # Enables LiveDashboard only for development
-  #
-  # If you want to use the LiveDashboard in production, you should put
-  # it behind authentication and allow only admins to access it.
-  # If your application does not have an admins-only section yet,
-  # you can use Plug.BasicAuth to set up some basic authentication
-  # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
 
