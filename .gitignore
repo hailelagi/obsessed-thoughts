@@ -38,6 +38,3 @@ npm-debug.log
 
 # ignore my local postgres config
 /config/dev.exs
-
-# ignore config which may contain secrets after this commmit
-/config/
