@@ -3,25 +3,15 @@
 [<img src="https://img.shields.io/github/repo-size/obsessedyouth/obsessed-thoughts" alt="size badge"/>](Size)
 [<img src="https://img.shields.io/twitter/follow/TheObsessedBot?style=social" alt="twitter badge"/>](Twitter)
 
-## Motivation? 
-
-I don't know, I've always wanted to make this, the idea was initially just a twitter bot that scrapes threads for useful information
-about programming, resources etc. There's lots of really smart people on twitter, and they're always happy to share what they're thinking!
-invaluable information if you ask an aspiring junior dev such as myself. Then I saw a tweet from a stranger validating the need for such a
-thing. Will anyone ever use this? I don't know. But, I'm going to make it and I at least might find some use from it.
+## [STATUS - ABANDONED] 
+## 10/14/2020
+My twitter developer account was sadly rejected :( apparently the usecase of this side project violates the twitter developer rules, so I couldn't implement the automated rolling of tweet and stopped trying to improve other features. Sad, but such is life.
 
 ## Features
 
-- User authentication//management
-- twitter bot that scrapes threads
-- react notebook interface
-
-## Do you like this?
-
-You should check out [Notion](https://www.notion.so/pricing) which is releasing v1.0 of their API soon(?)
-If they do I hope to do interesting things with it. My Client is much inferior to Notion's as you can see :)
-Ideas for extending the functionality of this play-app are welcome! Please open an issue, however,
-I'm not promising to work on anything.
+- ~User authentication//management~
+- twitter bot that scrapes threads ¯\_(ツ)_/¯
+- ~react notebook interface~
 
 ## What did I use?
 
@@ -31,7 +21,7 @@ ExTwitter(bot) + Phoenix(server) + React(client) + Postgres(db)
 
 To start your Phoenix server:
 
-  * Install dependencies with `do, mix deps.get, deps.compile`
+  * Install dependencies with `mix do deps.get, deps.compile`
   * Install Node.js dependencies with `npm install` inside the `assets` directory
   * Start Phoenix endpoint with `mix phx.server`
 
