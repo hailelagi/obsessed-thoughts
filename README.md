@@ -1,7 +1,7 @@
 # Obsessed Thoughts :notebook: 
 [<img src="https://img.shields.io/github/license/obsessedyouth/obsessed-thoughts" alt="license badge"/>](License)
 [<img src="https://img.shields.io/github/repo-size/obsessedyouth/obsessed-thoughts" alt="size badge"/>](Size)
-[<img src="https://img.shields.io/twitter/follow/haile_lagi?style=social" alt="twitter badge"/>](Twitter)
+[<img src="https://img.shields.io/twitter/follow/TheObsessedBot?style=social" alt="twitter badge"/>](Twitter)
 
 ## Motivation? 
 
